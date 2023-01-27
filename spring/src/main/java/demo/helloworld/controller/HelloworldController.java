@@ -14,6 +14,7 @@ import java.util.List;
 
 @Controller
 public class HelloworldController {
+
     @GetMapping("hello-thymeleaf")
     public String HelloThymeleaf(Model model) {
         model.addAttribute("data", "thymeleaf");
