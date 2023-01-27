@@ -4,6 +4,6 @@
 
 <mapper namespace="demo.helloworld.repository.HelloMybatisRepository">
     <select id="list" resultType="demo.helloworld.entity.HelloMybatisEntity">
-        SELECT * FROM test
+        SELECT id, name, CURRENT_TIMESTAMP FROM test
     </select>
 </mapper>
