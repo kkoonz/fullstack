@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "demo"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.2-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -16,9 +16,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	runtimeOnly("com.h2database:h2")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0")
+	implementation("com.h2database:h2")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
 //	compileOnly("org.projectlombok:lombok")
 //	annotationProcessor("org.projectlombok:lombok")
 }
