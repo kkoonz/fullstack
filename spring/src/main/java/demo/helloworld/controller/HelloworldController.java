@@ -54,6 +54,7 @@ public class HelloworldController {
 
     @Autowired
     private HelloMybatisRepository mDAO;
+
     @ResponseBody
     @GetMapping("hello-mybatis")
     public List<HelloMybatisEntity> list() throws Exception {
