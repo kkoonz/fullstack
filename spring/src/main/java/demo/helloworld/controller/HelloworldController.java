@@ -1,7 +1,9 @@
 package demo.helloworld.controller;
 
-import demo.helloworld.entity.HelloMybatisEntity;
-import demo.helloworld.repository.HelloMybatisRepository;
+import demo.helloworld.entity.HelloJPAEntity;
+import demo.helloworld.model.HelloMybatisEntity;
+import demo.helloworld.repository.HelloJPARepository;
+import demo.helloworld.dao.HelloMybatisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -66,5 +68,18 @@ public class HelloworldController {
     @ResponseBody
     public String helloURL(@PathVariable("data") String data) {
         return "Hello " + data;
+    }
+
+    @Autowired
+    private HelloJPARepository jDAO;
+
+    @ResponseBody
+    @GetMapping("hello-JPA")
+    public List<HelloJPAEntity> helloJPA() {
+        HelloJPAEntity e = new HelloJPAEntity("Hi");
+        jDAO.save(e);
+        List<HelloJPAEntity> list = jDAO.findAll();
+        jDAO.delete(e);
+        return list;
     }
 }
