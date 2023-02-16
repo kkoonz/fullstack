@@ -1,11 +1,12 @@
 package demo.helloworld.controller;
 
+import demo.helloworld.dao.HelloMybatisRepository;
 import demo.helloworld.entity.HelloJPAEntity;
 import demo.helloworld.model.HelloMybatisEntity;
 import demo.helloworld.repository.HelloJPARepository;
-import demo.helloworld.dao.HelloMybatisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@EnableJpaAuditing
 public class HelloworldController {
 
     @GetMapping("hello-thymeleaf")

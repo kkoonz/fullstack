@@ -1,10 +1,8 @@
 package demo.helloworld.config;
 
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
-import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -35,7 +33,7 @@ public class MariaDBConfig {
     @Primary
     @ConfigurationProperties("spring.datasource.hikari.mariadb")
     public DataSource mariaDBDataSource() {
-        return DataSourceBuilder.create().build();
+        return new HikariDataSource();
     }
 
     @Bean
@@ -51,15 +49,18 @@ public class MariaDBConfig {
     @Primary
     public LocalContainerEntityManagerFactoryBean mariaDBEntityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+
         em.setDataSource(mariaDBDataSource());
         em.setPackagesToScan(new String[] { "demo.helloworld.entity" });
-
-        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(adapter);
+        em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Map<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto", "create-drop");
+        properties.put("hibernate.hbm2ddl.auto", "update");
         properties.put("hibernate.dialect", "org.hibernate.dialect.MariaDB103Dialect");
+        properties.put("hibernate.format_sql", "true");
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.use_sql_comments", "true");
+        properties.put("hibernate.type.descriptor.sql", "trace");
         em.setJpaPropertyMap(properties);
 
         return em;
